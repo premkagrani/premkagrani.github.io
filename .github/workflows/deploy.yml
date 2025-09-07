@@ -29,6 +29,13 @@ jobs:
     - name: Create .nojekyll file
       run: touch dist/.nojekyll
       
+    - name: Verify build output
+      run: |
+        echo "Build output:"
+        ls -la dist/
+        echo "Checking for React app files:"
+        find dist/ -name "*.js" -o -name "*.css" | head -10
+      
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/master'
       uses: peaceiris/actions-gh-pages@v3
